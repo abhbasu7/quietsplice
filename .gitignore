@@ -1,0 +1,9 @@
+node_modules/
+*.log
+dist/
+__pycache__/
+.env*
+*.pem
+*.key
+*.db
+*.sqlite*

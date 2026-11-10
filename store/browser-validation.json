@@ -1,0 +1,12 @@
+{
+  "browser": "isolated headless Chrome",
+  "fixture": "tests/browser-check.html",
+  "result": "PASS",
+  "checks": [
+    "actual DOM visibility",
+    "video.muted set during simulated ad",
+    "persistent badge",
+    "original mute restored after ad label disappears"
+  ],
+  "limits": "Simulated page, not live YouTube or HBO integration; no debugger-input browser test."
+}

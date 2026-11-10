@@ -1,0 +1,13 @@
+Archive: buildooor-1.3.1.zip
+manifest.json
+background.js
+content.js
+ad-audio.js
+hbo-intro.js
+PRIVACY.md
+icons/icon-16.png
+icons/icon-32.png
+icons/icon-48.png
+icons/icon-128.png
+SHA256: a2b77590bc01dc54fee66b047472d6916723c340d3e79a764502caaa984ab32e
+PASS: allowlist, manifest references, secret scan, CRC and source bytes verified.

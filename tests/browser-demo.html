@@ -1,0 +1,122 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Buildooor — Ad muted demo</title><style>
+*{box-sizing:border-box}body{margin:0;background:#0c151c;color:#edf4f6;font:18px system-ui;padding:45px 56px}header{display:flex;align-items:center;gap:15px}header img{width:48px;height:48px}h1{font-size:25px;margin:0}header span{margin-left:auto;color:#a6bbc6;font-size:14px}main{margin-top:30px;display:grid;grid-template-columns:2fr 1fr;gap:30px}.html5-video-player{position:relative;height:430px;border-radius:18px;background:linear-gradient(135deg,#224953,#152935);overflow:hidden}video{position:absolute;width:100%;height:100%;pointer-events:none}.scene{position:absolute;inset:0;display:grid;place-content:center;text-align:center;pointer-events:none}.scene strong{font-size:55px;color:#73e3ba}.scene p{color:#bad0d8}.label{position:absolute;top:22px;left:24px;font-size:14px;color:#f8d77f}aside{padding:30px 0}aside h2{font-size:31px;line-height:1.2;margin-top:8px}aside p{color:#b4c7cf;line-height:1.6}.pill{color:#73e3ba;font-size:14px;letter-spacing:2px}footer{margin-top:32px;color:#9cb3c0;font-size:14px}#result{font-size:14px}</style>
+<header><img src="../icons/icon-128.png" alt=""><h1>Buildooor Ad Skip &amp; Mute</h1><span>Desktop browser extension</span></header>
+<main><section class="html5-video-player ad-showing"><video></video><div class="scene"><strong>Quieter breaks.</strong><p>Your volume stays the same.</p></div><div class="label">AD BREAK · DEMONSTRATION</div></section><aside><div class="pill">CLEAR STATUS</div><h2>Know when<br>audio is muted.</h2><p>The badge stays visible throughout a detected ad break. Audio returns to its previous mute state afterward.</p><p>Supported sites:<br>YouTube · HBO Max / Max</p></aside></main><footer>Simulated player demo using the extension’s actual status script. Not a screenshot of YouTube or HBO Max.</footer><div id="result"></div>
+<script>(() => {
+  "use strict";
+  const youtube = "www.youtube.com" === "www.youtube.com";
+  const hbo = /(^|\.)(hbomax|max)\.com$/.test("www.youtube.com");
+  if (!youtube && !hbo) return;
+  const owned = new Map();
+  let active = false;
+  let missingSince = null;
+  let notice;
+  let noticeUntil = 0;
+
+  function visible(element) {
+    return element.isConnected && element.checkVisibility({
+      checkOpacity: true, checkVisibilityCSS: true
+    }) && element.getClientRects().length > 0;
+  }
+
+  function announce(text) {
+    if (!notice) {
+      notice = document.createElement("div");
+      notice.setAttribute("role", "status");
+      notice.style.cssText = "position:fixed;bottom:85px;left:24px;z-index:2147483647;" +
+        "background:#151515;color:white;padding:6px 10px;border-radius:999px;" +
+        "font:600 12px system-ui;pointer-events:none;";
+    }
+    notice.textContent = text;
+    noticeUntil = performance.now() + 2200;
+    if ("speechSynthesis" in window && "SpeechSynthesisUtterance" in window) {
+      const message = new SpeechSynthesisUtterance(text);
+      message.lang = "en-US";
+      // Use a local voice when available. Never cancel the page's speech queue.
+      const voice = speechSynthesis.getVoices().find(v => v.localService && v.lang.startsWith("en"));
+      if (voice) {
+        message.voice = voice;
+        try { speechSynthesis.speak(message); }
+        catch (error) { console.warn("[Buildooor] Speech unavailable:", String(error.message || error)); }
+      }
+    }
+  }
+
+  function restore(announceChange = true) {
+    let unmuted = false;
+    for (const [video, wasMuted] of owned) {
+      video.muted = wasMuted;
+      if (!wasMuted) unmuted = true;
+    }
+    owned.clear();
+    if (unmuted && announceChange) announce("Unmuting");
+  }
+
+  function check() {
+    for (const [video, wasMuted] of owned) {
+      if (!video.isConnected) { video.muted = wasMuted; owned.delete(video); }
+    }
+    const players = youtube
+      ? [...document.querySelectorAll('.html5-video-player.ad-showing, #movie_player:has([id^="ad-badge:"])')].filter(visible)
+      : [];
+    const hasAd = youtube ? players.length > 0
+      : [...document.querySelectorAll('[data-testid="player-ux-ad-label"]')].some(visible);
+    const now = performance.now();
+    if (hasAd) {
+      active = true;
+      missingSince = null;
+      const videos = youtube ? players.flatMap(player => [...player.querySelectorAll("video")])
+        : [...document.querySelectorAll("video")].filter(visible);
+      let newlyMuted = false;
+      for (const video of videos) {
+        if (!video.isConnected) continue;
+        if (!owned.has(video)) {
+          owned.set(video, video.muted);
+          if (!video.muted) newlyMuted = true;
+        }
+        video.muted = true;
+      }
+      if (newlyMuted) announce("Muted");
+      else if (!notice && owned.size > 0) {
+        // Create the same visual notice without speaking over pre-muted playback.
+        const placeholder = document.createElement("div");
+        placeholder.setAttribute("role", "status");
+        placeholder.style.cssText = "position:fixed;bottom:85px;left:24px;z-index:2147483647;" +
+          "background:#151515;color:white;padding:6px 10px;border-radius:999px;" +
+          "font:600 12px system-ui;pointer-events:none;";
+        notice = placeholder;
+      }
+    } else if (active) {
+      // Avoid unmuting between ads when the countdown briefly disappears.
+      missingSince ??= now;
+      if (now - missingSince >= 1200) {
+        active = false;
+        missingSince = null;
+        restore();
+      }
+    }
+    if (notice) {
+      const adMuted = active && owned.size > 0;
+      if (adMuted && notice.textContent !== "Ad muted") notice.textContent = "Ad muted";
+      if (adMuted || now < noticeUntil) {
+        const host = document.fullscreenElement || document.body;
+        if (notice.parentNode !== host) host.appendChild(notice);
+      } else {
+        notice.remove();
+      }
+    }
+  }
+
+  window.addEventListener("pagehide", () => {
+    restore(false);
+    active = false;
+    missingSince = null;
+    noticeUntil = 0;
+    notice?.remove();
+  });
+  window.addEventListener("pageshow", check);
+  // Polling avoids observing the extension's own notification mutations.
+  setInterval(check, 250);
+  check();
+})();
+</script></html>
