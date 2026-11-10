@@ -1,6 +1,6 @@
 {
-  "name": "buildooor-ad-skip-mute",
-  "version": "1.3.1",
+  "name": "quietsplice",
+  "version": "1.3.2",
   "private": true,
   "scripts": {
     "test": "node --test",

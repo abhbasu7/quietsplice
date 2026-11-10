@@ -1,6 +1,6 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><title>Buildooor — Ad muted demo</title><style>
+<!doctype html><html lang="en"><meta charset="utf-8"><title>QuietSplice — Ad muted demo</title><style>
 *{box-sizing:border-box}body{margin:0;background:#0c151c;color:#edf4f6;font:18px system-ui;padding:45px 56px}header{display:flex;align-items:center;gap:15px}header img{width:48px;height:48px}h1{font-size:25px;margin:0}header span{margin-left:auto;color:#a6bbc6;font-size:14px}main{margin-top:30px;display:grid;grid-template-columns:2fr 1fr;gap:30px}.html5-video-player{position:relative;height:430px;border-radius:18px;background:linear-gradient(135deg,#224953,#152935);overflow:hidden}video{position:absolute;width:100%;height:100%;pointer-events:none}.scene{position:absolute;inset:0;display:grid;place-content:center;text-align:center;pointer-events:none}.scene strong{font-size:55px;color:#73e3ba}.scene p{color:#bad0d8}.label{position:absolute;top:22px;left:24px;font-size:14px;color:#f8d77f}aside{padding:30px 0}aside h2{font-size:31px;line-height:1.2;margin-top:8px}aside p{color:#b4c7cf;line-height:1.6}.pill{color:#73e3ba;font-size:14px;letter-spacing:2px}footer{margin-top:32px;color:#9cb3c0;font-size:14px}#result{font-size:14px}</style>
-<header><img src="../icons/icon-128.png" alt=""><h1>Buildooor Ad Skip &amp; Mute</h1><span>Desktop browser extension</span></header>
+<header><img src="../icons/icon-128.png" alt=""><h1>QuietSplice Ad Skip &amp; Mute</h1><span>Desktop browser extension</span></header>
 <main><section class="html5-video-player ad-showing"><video></video><div class="scene"><strong>Quieter breaks.</strong><p>Your volume stays the same.</p></div><div class="label">AD BREAK · DEMONSTRATION</div></section><aside><div class="pill">CLEAR STATUS</div><h2>Know when<br>audio is muted.</h2><p>The badge stays visible throughout a detected ad break. Audio returns to its previous mute state afterward.</p><p>Supported sites:<br>YouTube · HBO Max / Max</p></aside></main><footer>Simulated player demo using the extension’s actual status script. Not a screenshot of YouTube or HBO Max.</footer><div id="result"></div>
 <script>(() => {
   "use strict";
@@ -37,7 +37,7 @@
       if (voice) {
         message.voice = voice;
         try { speechSynthesis.speak(message); }
-        catch (error) { console.warn("[Buildooor] Speech unavailable:", String(error.message || error)); }
+        catch (error) { console.warn("[QuietSplice] Speech unavailable:", String(error.message || error)); }
       }
     }
   }

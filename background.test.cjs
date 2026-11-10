@@ -24,7 +24,7 @@ function worker({points = [point, point, null], fail} = {}) {
   vm.runInContext(code, context);
   const sender = {id: "ours", frameId: 0, url: "https://www.youtube.com/watch?v=test", tab: {id: 12}};
   return {calls, context,
-    request(overrides = {}) {return new Promise(resolve => listener({type: "buildooor-skip"}, {...sender, ...overrides}, resolve));}
+    request(overrides = {}) {return new Promise(resolve => listener({type: "quietsplice-skip"}, {...sender, ...overrides}, resolve));}
   };
 }
 test("sends browser input and observes a transition, then detaches", async () => {

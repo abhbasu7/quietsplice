@@ -1,6 +1,6 @@
 # Reviewer notes
 
-Buildooor 1.3.1 is a Manifest V3 desktop extension with no runtime dependencies or remotely hosted code. Its scope is YouTube and HBO Max/Max only.
+QuietSplice 1.3.2 is a Manifest V3 desktop extension with no runtime dependencies or remotely hosted code. Its scope is YouTube and HBO Max/Max only.
 
 YouTube: visit www.youtube.com, start an ad-supported video, and wait for a skippable ad. Ad inventory varies; a Skip control is not guaranteed on each play. The extension mutes detected ad playback and activates only the visible enabled Skip control. Already-muted playback remains muted. The badge persists until the ad ends plus a 1.2-second grace interval.
 
@@ -10,4 +10,4 @@ Close DevTools on the YouTube tab during skip testing. Chrome may display a debu
 
 Speech requires a local English system voice and may require interaction with the page. It is optional feedback; text and muting work without it. The extension does not collect, persist, or send user data. The source identifier returned by validation is held only during an attempt and is not logged or stored.
 
-Automated Node tests and a standalone browser fixture cover local logic. User confirmed working YouTube and HBO primary flows before release hardening. Final 1.3.1 real-service smoke testing remains a publisher release gate. Store screenshots show the real badge script running in a clearly labelled simulated player, not a live HBO or YouTube session.
+Automated Node tests and a standalone browser fixture cover local logic. User confirmed working YouTube and HBO primary flows before release hardening. Final 1.3.2 real-service smoke testing remains a publisher release gate. Store screenshots show the real badge script running in a clearly labelled simulated player, not a live HBO or YouTube session.

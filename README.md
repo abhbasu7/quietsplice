@@ -1,4 +1,4 @@
-# Buildooor Ad Skip & Mute
+# QuietSplice Ad Skip & Mute
 
 A dependency-free desktop Chrome/Edge extension for quieter ad breaks on **YouTube and HBO Max / Max**.
 
@@ -24,16 +24,22 @@ Site access is limited to YouTube and HBO Max/Max domains. Hulu, Rumble, Disney+
 
 The extension mutes the video element, not Chrome or your PC. YouTube's own speaker icon may not update. A 1.2-second grace interval prevents unmuting between consecutive ads. Existing mute settings and volume are preserved. Refreshing or disabling the extension mid-ad may require manually unmuting the player. Site changes, hidden ad indicators, and browser timer throttling can affect behavior. Native mobile/TV apps are not supported.
 
-The user confirmed YouTube and HBO primary flows during development. Release hardening has automated regression coverage. Final version 1.3.1 live-service smoke testing remains pending; see [release checklist](store/RELEASE-CHECKLIST.md).
+The user confirmed YouTube and HBO primary flows during development. Release hardening has automated regression coverage. Final version 1.3.2 live-service smoke testing remains pending; see [release checklist](store/RELEASE-CHECKLIST.md).
 
 ## Develop and package
 
-Node.js 22+ runs `npm test` (no npm install needed). Python 3.10+ standard library runs `python scripts/package_release.py`. The packaging script uses a fixed allowlist, validates manifest paths, scans packaged text for common secret patterns, writes dist/buildooor-1.3.1.zip and SHA-256, and lists every archive member. Generated dist files are ignored by Git. Icons were created using existing Pillow tooling; Pillow is not a runtime or packaging dependency.
+Node.js 22+ runs `npm test` (no npm install needed). Python 3.10+ standard library runs `python scripts/package_release.py`. Add `--minimal` for a runtime-only unpacked-test ZIP. The packaging script uses a fixed allowlist, validates manifest paths, scans packaged text for common secret patterns, writes dist/quietsplice-1.3.2.zip and SHA-256, and lists every archive member. Generated dist files are ignored by Git. Icons were created using existing Pillow tooling; Pillow is not a runtime or packaging dependency.
 
 The source repository includes tests, a clearly labelled standalone demo page, store assets, and submission copy. The release ZIP contains runtime files and the privacy policy only. No source-code license has been selected; choose one before describing a public repository as open source.
 
-## Release 1.3.1
+## Release 1.3.2
 
 Restrict site access to confirmed services; validate page origin and coordinates before YouTube input; back off after debugger failures; restore detached videos and remove notices on page exit; use only local English speech voices; add icons, release verification, and store materials.
 
 Independent project; not affiliated with YouTube, Google, HBO Max, or Warner Bros. Discovery.
+
+## Project and support
+
+[Source repository](https://github.com/abhbasu7/quietsplice) · [Report an issue](https://github.com/abhbasu7/quietsplice/issues) · [Public privacy policy](https://github.com/abhbasu7/quietsplice/blob/main/PRIVACY.md)
+
+Public links require main to be pushed. No Chrome Web Store submission has been made.

@@ -1,4 +1,4 @@
-# Release review — 1.3.1
+# Release review — 1.3.2
 
 Reviewed runtime: manifest.json, background.js, content.js, ad-audio.js, hbo-intro.js and their tests. The loaded project E:/repos/ad-skip is the release repository. The earlier E:/repos/buildooor copy is not the commit or release target.
 
@@ -19,6 +19,8 @@ Archive listing/hash and allowlist/secret/CRC/source-byte checks: archive-conten
 
 ## Remaining publication gates
 
-The user's earlier YouTube and HBO live confirmations are recorded. Final hardened 1.3.1 live-service behavior, fullscreen on each real service, and trusted debugger input on the final build were not reverified because interactive browser tooling was unavailable. Synthetic/DOM/CDP mocks are labelled as such. Run the manual acceptance checklist before submission.
+The user's earlier YouTube and HBO live confirmations are recorded. Final hardened 1.3.2 live-service behavior, fullscreen on each real service, and trusted debugger input on the final build were not reverified because interactive browser tooling was unavailable. Synthetic/DOM/CDP mocks are labelled as such. Run the manual acceptance checklist before submission.
 
-Publisher must supply live support and privacy-policy URLs, complete truthful dashboard disclosures, review images/listing, and approve submission. No credentials, dummy URLs, or runtime placeholders are packaged. Source-code license selection remains the publisher's choice. No remote push, public publication, or store submission was performed.
+Repository supplied: https://github.com/abhbasu7/quietsplice. Support and privacy URLs are configured; verify them publicly after pushing. Publisher must complete truthful dashboard disclosures, review images/listing, and approve submission. No credentials, dummy URLs, or runtime placeholders are packaged. Source-code license selection remains the publisher's choice. No remote push, public publication, or store submission was performed.
+
+Branding finalized as QuietSplice in 1.3.2; internal message names, metadata, images and archive names aligned. Runtime behavior remains the hardened 1.3.1 implementation.

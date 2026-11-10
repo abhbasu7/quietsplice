@@ -1,4 +1,4 @@
-Archive: buildooor-1.3.1.zip
+Archive: quietsplice-1.3.2.zip
 manifest.json
 background.js
 content.js
@@ -9,5 +9,5 @@ icons/icon-16.png
 icons/icon-32.png
 icons/icon-48.png
 icons/icon-128.png
-SHA256: a2b77590bc01dc54fee66b047472d6916723c340d3e79a764502caaa984ab32e
+SHA256: e4857baae407ab975b0b925520ccb17a3983f239954f13a1447d9c8e9904b0e7
 PASS: allowlist, manifest references, secret scan, CRC and source bytes verified.

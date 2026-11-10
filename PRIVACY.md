@@ -1,8 +1,8 @@
-# Privacy policy — Buildooor Ad Skip & Mute
+# Privacy policy — QuietSplice Ad Skip & Mute
 
-Effective date: November 9, 2026. Applies to version 1.3.1.
+Effective date: November 10, 2026. Applies to version 1.3.2.
 
-Buildooor runs locally in desktop Chrome/Edge on YouTube and HBO Max/Max pages. It detects player controls and ad labels, mutes detected ad videos, shows status notices, and can activate YouTube Skip and HBO Skip Intro controls.
+QuietSplice runs locally in desktop Chrome/Edge on YouTube and HBO Max/Max pages. It detects player controls and ad labels, mutes detected ad videos, shows status notices, and can activate YouTube Skip and HBO Skip Intro controls.
 
 ## Data use
 
@@ -24,4 +24,4 @@ YouTube and HBO Max remain governed by their own privacy policies; this extensio
 
 ## Contact and changes
 
-Use the support link on the extension's Chrome Web Store listing to contact the publisher. This policy must be hosted at the URL supplied in that listing. Material changes will be reflected in this document and the store disclosures before release.
+Contact the publisher through [GitHub Issues](https://github.com/abhbasu7/quietsplice/issues). The public policy is [PRIVACY.md](https://github.com/abhbasu7/quietsplice/blob/main/PRIVACY.md). Material changes will be reflected in this document and the store disclosures before release.

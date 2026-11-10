@@ -14,7 +14,7 @@
   function status(message) {
     if (message === lastStatus) return;
     lastStatus = message;
-    console.info("[Buildooor auto-skip] " + message);
+    console.info("[QuietSplice auto-skip] " + message);
   }
 
   function skipAvailableAd() {
@@ -39,7 +39,7 @@
       lastClick.set(button, now);
       if (requesting) break;
       requesting = true;
-      chrome.runtime.sendMessage({type: "buildooor-skip"}, response => {
+      chrome.runtime.sendMessage({type: "quietsplice-skip"}, response => {
         requesting = false;
         const error = chrome.runtime.lastError;
         if (error) { retryAfter = performance.now() + 30000; status("Skip failed: " + error.message); return; }

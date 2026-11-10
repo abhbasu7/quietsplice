@@ -1,6 +1,6 @@
 # Chrome Web Store submission copy
 
-Name: Buildooor Ad Skip & Mute
+Name: QuietSplice — Ad Skip & Mute
 Category suggestion: Accessibility (publisher must select the appropriate current dashboard category).
 Language: English.
 Visibility: Public after publisher approval.
@@ -10,7 +10,7 @@ Short description: Skip available YouTube ads, mute detected YouTube and HBO Max
 
 Make ad breaks quieter on YouTube and HBO Max in your desktop browser.
 
-Buildooor mutes detected ad videos and displays a small Ad muted badge throughout the break. When the ad ends, it restores the previous mute state and displays Unmuting. Your volume setting stays unchanged; videos you already muted stay muted.
+QuietSplice mutes detected ad videos and displays a small Ad muted badge throughout the break. When the ad ends, it restores the previous mute state and displays Unmuting. Your volume setting stays unchanged; videos you already muted stay muted.
 
 On YouTube, it activates the official Skip button once that control is visible and enabled. On HBO Max / Max, it also clicks the visible Skip Intro button. It does not skip HBO commercial breaks.
 
@@ -41,4 +41,7 @@ No user data is collected/transmitted to the developer. The extension processes 
 
 ## Required publisher fields
 
-Enter the actual public support URL and hosted privacy-policy URL. These are not present in manifest.json because the GitHub repository is not yet specified. Do not submit until both links are live and accessible while signed out.
+Support URL: https://github.com/abhbasu7/quietsplice/issues
+Privacy policy URL: https://github.com/abhbasu7/quietsplice/blob/main/PRIVACY.md
+Homepage: https://github.com/abhbasu7/quietsplice
+Verify all links while signed out after pushing main and before submitting the store listing.

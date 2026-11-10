@@ -1,4 +1,4 @@
-# Release checklist — 1.3.1
+# Release checklist — 1.3.2
 
 ## Prepared locally
 
@@ -11,9 +11,9 @@
 
 ## Publisher actions before submission
 
-- Host PRIVACY.md publicly (GitHub Pages or another accessible website) and enter its URL in the dashboard.
-- Set a working public support URL and verify support/contact fields in the dashboard.
-- Run final 1.3.1 smoke checks on YouTube and HBO: mute, skip where offered, restore, pre-muted playback, consecutive ads, and fullscreen.
+- Push main and verify https://github.com/abhbasu7/quietsplice/blob/main/PRIVACY.md while signed out; use this privacy URL in the dashboard.
+- Verify https://github.com/abhbasu7/quietsplice/issues while signed out; use it as the support URL.
+- Run final 1.3.2 smoke checks on YouTube and HBO: mute, skip where offered, restore, pre-muted playback, consecutive ads, and fullscreen.
 - Review generated store images. The screenshot is explicitly a simulated demo; replace/add real-service screenshots if desired, ensuring no account details are visible.
 - Review all privacy and permission disclosures against the current dashboard questions.
 - Confirm publisher account verification/2FA, upload the versioned ZIP, choose public visibility, and submit for review only after approval.

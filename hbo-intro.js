@@ -17,7 +17,7 @@
       if (now - (lastClick.get(button) ?? -Infinity) < 2000) continue;
       lastClick.set(button, now);
       button.click();
-      console.info("[Buildooor HBO] Skip Intro click attempted.");
+      console.info("[QuietSplice HBO] Skip Intro click attempted.");
       break;
     }
   }

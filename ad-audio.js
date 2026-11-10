@@ -33,7 +33,7 @@
       if (voice) {
         message.voice = voice;
         try { speechSynthesis.speak(message); }
-        catch (error) { console.warn("[Buildooor] Speech unavailable:", String(error.message || error)); }
+        catch (error) { console.warn("[QuietSplice] Speech unavailable:", String(error.message || error)); }
       }
     }
   }

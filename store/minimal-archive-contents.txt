@@ -1,0 +1,12 @@
+Archive: quietsplice-1.3.2-unpacked.zip
+manifest.json
+background.js
+content.js
+ad-audio.js
+hbo-intro.js
+icons/icon-16.png
+icons/icon-32.png
+icons/icon-48.png
+icons/icon-128.png
+SHA256: aa2ad181cce71be19f24fb5bcacc0c83a2854cb6c6eec7467c90ce560f41a026
+PASS: allowlist, manifest references, secret scan, CRC and source bytes verified.

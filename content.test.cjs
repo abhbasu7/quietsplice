@@ -18,7 +18,7 @@ function start(buttons, matches = () => true, ad = false) {
   vm.runInNewContext(source, {
     console: { info() {} }, window: {},
     chrome: { runtime: { sendMessage(message, callback) {
-      assert.equal(message.type, "buildooor-skip");
+      assert.equal(message.type, "quietsplice-skip");
       const candidate = buttons.find(b => !b.disabled && b.isConnected && b.checkVisibility());
       if (candidate) candidate.clicks++;
       callback({ok: true, outcome: "click-unconfirmed"});

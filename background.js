@@ -66,14 +66,14 @@ async function clickSkip(tabId) {
   } finally {
     if (attached) {
       try { await chrome.debugger.detach(target); }
-      catch (error) { console.warn("[Buildooor] Debugger cleanup:", String(error.message || error)); }
+      catch (error) { console.warn("[QuietSplice] Debugger cleanup:", String(error.message || error)); }
     }
   }
   return outcome;
 }
 
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
-  if (message?.type !== "buildooor-skip") return;
+  if (message?.type !== "quietsplice-skip") return;
   // No arbitrary coordinates or CDP commands are accepted from content scripts.
   if (sender.id !== chrome.runtime.id || sender.frameId !== 0 || !sender.tab || !Number.isInteger(sender.tab.id) || sender.tab.id < 0 ||
       !/^https:\/\/www\.youtube\.com\//.test(sender.url || "")) {
