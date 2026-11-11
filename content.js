@@ -29,18 +29,18 @@
       if (now - (lastClick.get(button) ?? -Infinity) < 1000) continue;
       lastClick.set(button, now);
       requesting = true;
-      requestSkip("quietsplice-skip");
+      requestSkip();
       break;
     }
   }
 
-  function requestSkip(type) {
-    chrome.runtime.sendMessage({type}, response => {
+  function requestSkip(retried = false) {
+    chrome.runtime.sendMessage({type: "quietsplice-skip"}, response => {
       const messageError = chrome.runtime.lastError?.message;
-      // Version 1.3.1 used a different message name.
-      if (type === "quietsplice-skip" && !response &&
+      // Give the worker one more chance to answer before backing off.
+      if (!retried && !response &&
           (!messageError || messageError === "The message port closed before a response was received.")) {
-        requestSkip("buildooor-skip");
+        requestSkip(true);
         return;
       }
       requesting = false;

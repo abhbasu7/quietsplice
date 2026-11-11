@@ -2,7 +2,7 @@ const {test} = require("node:test");
 const assert = require("node:assert/strict");
 const vm = require("node:vm");
 const {readFileSync} = require("node:fs");
-const code = readFileSync(`${__dirname}/background.js`, "utf8");
+const code = readFileSync(`${__dirname}/quietsplice-worker.js`, "utf8");
 const point = {x: 40, y: 50, src: "ad-1"};
 function worker({points = [point, point, null], fail} = {}) {
   let listener; const calls = [];
@@ -24,7 +24,8 @@ function worker({points = [point, point, null], fail} = {}) {
   vm.runInContext(code, context);
   const sender = {id: "ours", frameId: 0, url: "https://www.youtube.com/watch?v=test", tab: {id: 12}};
   return {calls, context,
-    request(overrides = {}, type = "quietsplice-skip") {return new Promise(resolve => listener({type}, {...sender, ...overrides}, resolve));}
+    dispatch(type, overrides, respond) {return listener({type}, {...sender, ...overrides}, respond);},
+    request(overrides = {}) {return new Promise(resolve => this.dispatch("quietsplice-skip", overrides, resolve));}
   };
 }
 test("sends browser input and observes a transition, then detaches", async () => {
@@ -32,11 +33,10 @@ test("sends browser input and observes a transition, then detaches", async () =>
  assert.equal(r.outcome, "transition-observed");
  assert.deepEqual(w.calls, ["attach", "Runtime.evaluate", "mouseMoved", "Runtime.evaluate", "mousePressed", "mouseReleased", "Runtime.evaluate", "detach"]);
 });
-test("accepts the older request name with the same sender checks", async () => {
+test("ignores unrelated messages before attaching the debugger", () => {
  const w = worker();
- assert.equal((await w.request({}, "buildooor-skip")).outcome, "transition-observed");
- assert.equal((await w.request({id: "other"}, "buildooor-skip")).outcome, "unauthorized");
- assert.equal(w.calls.filter(call => call === "attach").length, 1);
+ assert.equal(w.dispatch("unrelated-message", {}, () => assert.fail("Unexpected response")), undefined);
+ assert.deepEqual(w.calls, []);
 });
 test("an unchanged control is unconfirmed rather than counted as a skip", async () => {
  const w = worker({points: [point, point, point]});

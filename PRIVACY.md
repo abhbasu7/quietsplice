@@ -1,6 +1,6 @@
 # Privacy policy — QuietSplice Ad Skip & Mute
 
-Effective date: November 10, 2026. Applies to version 1.3.2.
+Effective date: November 10, 2026. Applies to versions 1.3.2 through 1.3.4.
 
 QuietSplice runs locally in desktop Chrome/Edge on YouTube and HBO Max/Max pages. It detects player controls and ad labels, mutes detected ad videos, shows status notices, and can activate YouTube Skip and HBO Skip Intro controls.
 

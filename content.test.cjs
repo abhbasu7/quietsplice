@@ -74,7 +74,7 @@ test("manifest only injects the existing script on YouTube", () => {
   assert.deepEqual(manifest.content_scripts[0].matches, ["https://www.youtube.com/*"]);
   assert.deepEqual(manifest.content_scripts[0].js, ["ad-audio.js", "content.js"]);
   assert.deepEqual(manifest.permissions, ["debugger"]);
-  assert.equal(manifest.background.service_worker, "background.js");
+  assert.equal(manifest.background.service_worker, "quietsplice-worker.js");
 });
 
 test("detects the observed skip-button:2 control without a legacy ad-showing class", () => {

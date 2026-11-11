@@ -26,9 +26,13 @@ The extension mutes the video element, not Chrome or your PC. YouTube's own spea
 
 ## Develop and package
 
-Node.js 22+ runs `npm test` (no npm install needed). Python 3.10+ standard library runs `python scripts/package_release.py`. Add `--minimal` for a runtime-only unpacked-test ZIP. The packaging script uses a fixed allowlist, validates manifest paths, scans packaged text for common secret patterns, writes dist/quietsplice-1.3.2.zip and SHA-256, and lists every archive member. Generated dist files are ignored by Git. Icons were created using existing Pillow tooling; Pillow is not a runtime or packaging dependency.
+Node.js 22+ runs `npm test` (no npm install needed). Python 3.10+ standard library runs `python scripts/package_release.py`. Add `--minimal` for a runtime-only unpacked-test ZIP. The packaging script uses a fixed allowlist, validates manifest paths, scans packaged text for common secret patterns, writes a versioned ZIP and SHA-256 to dist/, and lists every archive member. Generated dist files are ignored by Git. Icons were created using existing Pillow tooling; Pillow is not a runtime or packaging dependency.
 
 The source repository includes tests, a clearly labelled standalone demo page, store assets, and submission copy. The release ZIP contains runtime files and the privacy policy only. No source-code license has been selected; choose one before describing a public repository as open source.
+
+## Release 1.3.4
+
+Use the QuietSplice message name for YouTube Skip and retry once when the background worker gives no reply.
 
 ## Release 1.3.2
 

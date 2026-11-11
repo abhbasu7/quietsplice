@@ -6,7 +6,7 @@ import re
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-FILES = ["manifest.json", "background.js", "content.js", "ad-audio.js", "hbo-intro.js", "PRIVACY.md",
+FILES = ["manifest.json", "quietsplice-worker.js", "content.js", "ad-audio.js", "hbo-intro.js", "PRIVACY.md",
          "icons/icon-16.png", "icons/icon-32.png", "icons/icon-48.png", "icons/icon-128.png"]
 SECRET = re.compile(r"-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}|AKIA[A-Z0-9]{16}|sk-[A-Za-z0-9]{32,}")
 
