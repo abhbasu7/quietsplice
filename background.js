@@ -73,7 +73,7 @@ async function clickSkip(tabId) {
 }
 
 chrome.runtime.onMessage.addListener((message, sender, respond) => {
-  if (message?.type !== "quietsplice-skip") return;
+  if (message?.type !== "quietsplice-skip" && message?.type !== "buildooor-skip") return;
   // No arbitrary coordinates or CDP commands are accepted from content scripts.
   if (sender.id !== chrome.runtime.id || sender.frameId !== 0 || !sender.tab || !Number.isInteger(sender.tab.id) || sender.tab.id < 0 ||
       !/^https:\/\/www\.youtube\.com\//.test(sender.url || "")) {

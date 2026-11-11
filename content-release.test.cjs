@@ -22,6 +22,26 @@ test("backs off for 30 seconds after a debugger failure",()=>{
  app.tick(29000);assert.equal(app.requests.length,1);
  app.tick(1000);assert.equal(app.requests.length,2);
 });
+test("retries with the older message name when a worker closes the port without replying", () => {
+ const app = run();
+ app.reply(undefined, {message: "The message port closed before a response was received."});
+ assert.deepEqual(app.requests.map(request => request.type), ["quietsplice-skip", "buildooor-skip"]);
+ app.tick(2000);
+ assert.equal(app.requests.length, 2);
+ app.reply({outcome: "transition-observed"});
+});
+
+test("backs off after both message names go unanswered", () => {
+ const app = run();
+ const error = {message: "The message port closed before a response was received."};
+ app.reply(undefined, error);
+ app.reply(undefined, error);
+ app.tick(29000);
+ assert.equal(app.requests.length, 2);
+ app.tick(1000);
+ assert.equal(app.requests.at(-1).type, "quietsplice-skip");
+});
+
 test("backs off on runtime message errors instead of repeatedly requesting input",()=>{
  const app=run();app.reply(undefined,{message:"Extension context invalid"});
  app.tick(29000);assert.equal(app.requests.length,1);
