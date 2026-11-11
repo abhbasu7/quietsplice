@@ -1,9 +1,8 @@
 # Chrome Web Store submission copy
 
 Name: QuietSplice — Ad Skip & Mute
-Category suggestion: Accessibility (publisher must select the appropriate current dashboard category).
+Suggested category: Accessibility.
 Language: English.
-Visibility: Public after publisher approval.
 Short description: Skip available YouTube ads, mute detected YouTube and HBO Max ads, and skip HBO intros with clear status notices.
 
 ## Detailed description
@@ -28,20 +27,19 @@ Reduce interruptions in supported video players by muting detected ad breaks and
 
 ## Permission justification: debugger
 
-Required to activate YouTube's visible enabled Skip control using browser-level input when synthetic DOM clicks are ignored. A top-frame content script sends a fixed request; the service worker independently validates the target, calculates coordinates, checks visibility and hit testing, rechecks after hover, sends Input.dispatchMouseEvent, checks a transition, and detaches. Runtime.evaluate executes only validation code shipped in the extension. No page-supplied commands, arbitrary coordinates, remote code, network instrumentation, or other-site debugging is accepted.
+YouTube can ignore clicks sent by a page script. QuietSplice uses Chrome's debugger API to click the visible Skip button. It checks that the tab is on YouTube and that the button is available and unobstructed. It disconnects the debugger after each attempt.
 
-## Site-access justification
+## Site access
 
-www.youtube.com: detect/mute ads and locate available Skip controls.
-*.hbomax.com and *.max.com (including apex): detect the visible Ad label, mute and restore ad audio, and activate the exact Skip Intro control. No access is requested for Hulu, Rumble, Disney+, Amazon or other unverified services.
+- YouTube. Detect ad breaks, mute the video, and click Skip when available.
+- HBO Max and Max. Detect ad breaks, mute the video, and click Skip Intro when available.
 
-## Privacy dashboard answers to verify against current form
+## Privacy disclosures
 
-No user data is collected/transmitted to the developer. The extension processes website/player state locally and transiently for its stated purpose. No data is sold, used for unrelated purposes, or used to determine creditworthiness. All extension logic is packaged locally; no remotely hosted code is used. Publisher must review the exact dashboard questions and answer consistently with PRIVACY.md and the submitted code.
+QuietSplice reads player controls on the supported sites. It uses that information in the browser to mute and restore audio or click a player button. It stores no browsing history, sends no data to the developer, and runs only code included in the extension.
 
 ## Required publisher fields
 
 Support URL: https://github.com/abhbasu7/quietsplice/issues
 Privacy policy URL: https://github.com/abhbasu7/quietsplice/blob/main/PRIVACY.md
 Homepage: https://github.com/abhbasu7/quietsplice
-Verify all links while signed out after pushing main and before submitting the store listing.

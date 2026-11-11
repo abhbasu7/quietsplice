@@ -8,7 +8,7 @@ function run(){
  const button={isConnected:true, disabled:false, matches:()=>true, getAttribute:()=>null,
   checkVisibility:()=>true,getClientRects:()=>[{}],textContent:"Skip"};
  runtime.sendMessage=(message,reply)=>{requests.push(message);callback=reply;};
- vm.runInNewContext(source,{chrome:{runtime},performance:{now:()=>now},console:{info(){}},
+ vm.runInNewContext(source,{chrome:{runtime},performance:{now:()=>now},console:{warn(){}},
   document:{querySelector:()=>({}),querySelectorAll:()=>[button],documentElement:{}},
   MutationObserver:class{observe(){}},setTimeout(){},setInterval:fn=>{interval=fn;}});
  return {requests,tick(ms){now+=ms;interval();},reply(response,error){runtime.lastError=error;callback(response);runtime.lastError=undefined;}};

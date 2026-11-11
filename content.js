@@ -10,13 +10,6 @@
   let requesting = false;
   let retryAfter = 0;
 
-  let lastStatus = "";
-  function status(message) {
-    if (message === lastStatus) return;
-    lastStatus = message;
-    console.info("[QuietSplice auto-skip] " + message);
-  }
-
   function skipAvailableAd() {
     if (performance.now() < retryAfter) return;
     const adActive = !!document.querySelector(
@@ -25,7 +18,6 @@
     const candidates = document.querySelectorAll(
       selector + ', #movie_player button, #movie_player [role="button"]'
     );
-    let available = false;
     for (const button of candidates) {
       const label = (button.getAttribute("aria-label") || button.textContent || "").trim();
       if (!button.matches(selector) && !(adActive && /^skip(?: ads?)?$/i.test(label))) continue;
@@ -33,7 +25,6 @@
           button.getAttribute("aria-disabled") === "true" ||
           !button.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true }) ||
           button.getClientRects().length === 0) continue;
-      available = true;
       const now = performance.now();
       if (now - (lastClick.get(button) ?? -Infinity) < 1000) continue;
       lastClick.set(button, now);
@@ -41,26 +32,23 @@
       requesting = true;
       chrome.runtime.sendMessage({type: "quietsplice-skip"}, response => {
         requesting = false;
-        const error = chrome.runtime.lastError;
-        if (error) { retryAfter = performance.now() + 30000; status("Skip failed: " + error.message); return; }
-        if (!response) { retryAfter = performance.now() + 30000; status("Skip failed: no background response."); return; }
-        if (response.outcome === "error") retryAfter = performance.now() + 30000;
-        status(response.outcome === "transition-observed"
-          ? "Skip input sent; control disappeared or ad changed (transition observed)."
-          : "Skip result: " + response.outcome + (response.error ? " - " + response.error : ""));
+        const error = chrome.runtime.lastError?.message ??
+          (!response ? "No reply from the extension." : response.error);
+        if (error || response?.outcome === "error") {
+          retryAfter = performance.now() + 30000;
+          console.warn("[QuietSplice] Could not click Skip.", error || "");
+        }
       });
       break;
     }
-    if (!available) status(adActive ? "Ad detected; waiting for an enabled Skip control."
-      : "Watching for ads and Skip controls.");
   }
 
-  let pending = false;
+  let checkScheduled = false;
   function scheduleCheck() {
-    if (pending) return;
-    pending = true;
+    if (checkScheduled) return;
+    checkScheduled = true;
     setTimeout(() => {
-      pending = false;
+      checkScheduled = false;
       skipAvailableAd();
     }, 0);
   }

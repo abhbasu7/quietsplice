@@ -5,7 +5,7 @@ A dependency-free desktop Chrome/Edge extension for quieter ad breaks on **YouTu
 - Mutes detected ad videos while preserving your volume and previous mute state.
 - Shows **Ad muted** throughout the break and **Unmuting** when audio is restored.
 - Activates YouTube's visible enabled Skip button using browser-level input.
-- Clicks HBO's visible Skip Intro control; HBO commercial breaks are muted, not skipped.
+- Clicks HBO's visible Skip Intro button. During HBO ads, it mutes the video.
 - Optional spoken feedback uses an available local English voice. Without it, text feedback still works.
 
 ## Install locally
@@ -16,15 +16,13 @@ No Node, Python, server, account with this extension, or build step is needed to
 
 ## Permissions and privacy
 
-YouTube can ignore synthetic clicks. The debugger permission lets the worker independently validate and activate the official visible Skip control using browser-level input. Chrome's warning describes broad debugger capabilities; this implementation is restricted to YouTube and fixed commands. A debugging banner may appear. Close DevTools on the YouTube tab while skipping.
+YouTube can ignore synthetic clicks. QuietSplice uses Chrome's debugger permission to check and click the visible Skip button on YouTube. A debugging banner may appear. Close DevTools on the YouTube tab while skipping.
 
 Site access is limited to YouTube and HBO Max/Max domains. Hulu, Rumble, Disney+, Prime Video, and Amazon are not supported in this release. No analytics, persistent storage, browsing-history collection, or extension-initiated network requests. See [Privacy policy](PRIVACY.md).
 
 ## Behavior and limits
 
 The extension mutes the video element, not Chrome or your PC. YouTube's own speaker icon may not update. A 1.2-second grace interval prevents unmuting between consecutive ads. Existing mute settings and volume are preserved. Refreshing or disabling the extension mid-ad may require manually unmuting the player. Site changes, hidden ad indicators, and browser timer throttling can affect behavior. Native mobile/TV apps are not supported.
-
-The user confirmed YouTube and HBO primary flows during development. Release hardening has automated regression coverage. Final version 1.3.2 live-service smoke testing remains pending; see [release checklist](store/RELEASE-CHECKLIST.md).
 
 ## Develop and package
 
@@ -41,5 +39,3 @@ Independent project; not affiliated with YouTube, Google, HBO Max, or Warner Bro
 ## Project and support
 
 [Source repository](https://github.com/abhbasu7/quietsplice) · [Report an issue](https://github.com/abhbasu7/quietsplice/issues) · [Public privacy policy](https://github.com/abhbasu7/quietsplice/blob/main/PRIVACY.md)
-
-Public links require main to be pushed. No Chrome Web Store submission has been made.

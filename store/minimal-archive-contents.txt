@@ -8,5 +8,5 @@ icons/icon-16.png
 icons/icon-32.png
 icons/icon-48.png
 icons/icon-128.png
-SHA256: aa2ad181cce71be19f24fb5bcacc0c83a2854cb6c6eec7467c90ce560f41a026
+SHA256: a1212855b65c549fe87a3a16271415566eb22285c9c8523acd6f22f48a7e892b
 PASS: allowlist, manifest references, secret scan, CRC and source bytes verified.

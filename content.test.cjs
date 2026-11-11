@@ -16,7 +16,7 @@ function start(buttons, matches = () => true, ad = false) {
   let observer, interval, now = 0;
   const queued = [];
   vm.runInNewContext(source, {
-    console: { info() {} }, window: {},
+    console: { warn() {} }, window: {},
     chrome: { runtime: { sendMessage(message, callback) {
       assert.equal(message.type, "quietsplice-skip");
       const candidate = buttons.find(b => !b.disabled && b.isConnected && b.checkVisibility());
